@@ -3,10 +3,10 @@ title       : Insulin Dose Calculator
 subtitle    : Data Products Project Work
 author      : Serge Masyn
 job         : June 21 2015
-framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+framework   : io2012      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [bootstrap, shiny, interactive,quiz]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
@@ -46,6 +46,40 @@ knit        : slidify::knit2slides
 * High Blood Sugar Dose (Y): (Actual Blood Sugar - Target Bllod Sugar) / High Bllod Correction Factor
 
 ---
+
+```{r opts.label="shiny", cache=FALSE}
+shinyUI(fluidPage(
+    titlePanel("Insulin Dose Calculator"),
+    sidebarLayout(
+      sidebarPanel(
+        numericInput('idWe', 'Body Weight (kg)', 0, min = 55, max = 120, step = 1),
+        radioButtons("idMe", "Type of Meal",
+                           c("Breakfast" = "1",
+                             "Lunch" = "2",
+                             "Dinner" = "3")),
+        numericInput('idBg', 'Current Blood Glucose Level (mg/dl)', 0, min = 55, max = 250, step = 5),
+ #       dateInput("date", "Date:"),
+        actionButton("goButton", "Go!")
+        ),
+    mainPanel(
+        h3('Outputs'),
+        h4('You entered'),
+        verbatimTextOutput("oidWe"),
+        h4('You entered'),
+        verbatimTextOutput("oidMe"),
+        h4('You entered'),
+        verbatimTextOutput("oidBg"),
+        h4('You entered'),
+        verbatimTextOutput("odate"),
+        h4('Which resulted in a total dose of insulin of (units) '),
+        verbatimTextOutput("oidIn")
+        ),
+    position = c("left", "right"), fluid = TRUE
+    )))
+```
+
+---
+
 ## References
 1. Diabetes Mellitus Type 2; https://en.wikipedia.org/wiki/Diabetes_mellitus_type_2
 2. Diabetes Data Set; https://archive.ics.uci.edu/ml/datasets/Diabetes

@@ -3,10 +3,10 @@ title       : Insulin Dose Calculator
 subtitle    : Data Products Project Work
 author      : Serge Masyn
 job         : June 21 2015
-framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+framework   : io2012      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [bootstrap, shiny, interactive,quiz]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
@@ -46,6 +46,64 @@ knit        : slidify::knit2slides
 * High Blood Sugar Dose (Y): (Actual Blood Sugar - Target Bllod Sugar) / High Bllod Correction Factor
 
 ---
+
+<!--html_preserve--><div class="container-fluid">
+<h2>Insulin Dose Calculator</h2>
+<div class="row">
+<div class="col-sm-4">
+<form class="well">
+<div class="form-group shiny-input-container">
+<label for="idWe">Body Weight (kg)</label>
+<input id="idWe" type="number" class="form-control" value="0" min="55" max="120" step="1"/>
+</div>
+<div id="idMe" class="form-group shiny-input-radiogroup shiny-input-container">
+<label class="control-label" for="idMe">Type of Meal</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="idMe" value="1" checked="checked"/>
+<span>Breakfast</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="idMe" value="2"/>
+<span>Lunch</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="idMe" value="3"/>
+<span>Dinner</span>
+</label>
+</div>
+</div>
+</div>
+<div class="form-group shiny-input-container">
+<label for="idBg">Current Blood Glucose Level (mg/dl)</label>
+<input id="idBg" type="number" class="form-control" value="0" min="55" max="250" step="5"/>
+</div>
+<button id="goButton" type="button" class="btn btn-default action-button">Go!</button>
+</form>
+</div>
+<div class="col-sm-8">
+<h3>Outputs</h3>
+<h4>You entered</h4>
+<pre id="oidWe" class="shiny-text-output"></pre>
+<h4>You entered</h4>
+<pre id="oidMe" class="shiny-text-output"></pre>
+<h4>You entered</h4>
+<pre id="oidBg" class="shiny-text-output"></pre>
+<h4>You entered</h4>
+<pre id="odate" class="shiny-text-output"></pre>
+<h4>Which resulted in a total dose of insulin of (units) </h4>
+<pre id="oidIn" class="shiny-text-output"></pre>
+</div>
+</div>
+</div><!--/html_preserve-->
+
+---
+
 ## References
 1. Diabetes Mellitus Type 2; https://en.wikipedia.org/wiki/Diabetes_mellitus_type_2
 2. Diabetes Data Set; https://archive.ics.uci.edu/ml/datasets/Diabetes
